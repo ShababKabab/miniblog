@@ -17,6 +17,9 @@ from django.contrib import admin
 from django.urls import path
 from blog import views
 
+from django.views.static import serve
+from django.conf.urls import url
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home),
@@ -29,5 +32,7 @@ urlpatterns = [
     path('addpost/', views.add_post, name='addpost'),
     path('updatepost/<int:id>', views.update_post, name='updatepost'),
     path('deletepost/<int:id>', views.delete_post, name='deletepost'),
+    url(r'^media/(?P<path>.*)$', serve,{'document_root':       settings.MEDIA_ROOT}),
+    url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
 
 ]
